@@ -1,0 +1,281 @@
+export const DESTS = [
+  {
+    id: 1,
+    flag: '🇦🇺',
+    country: 'Australia',
+    name: 'Daintree Rainforest',
+    hotel: 'Daintree Wilderness Lodge',
+    days: '1–4',
+    nights: 4,
+    nightly: '$300–400',
+    desc: "The world's oldest living rainforest — 135 million years old. Private rainforest cabins, guided cassowary walks, croc river cruises on the Daintree River, and legendary glowing fungi night walks. Cape Tribulation day trip included.",
+    acts: ['Cassowary Walk', 'Croc River Cruise', 'Night Walk', 'Cape Trib Day Trip'],
+    px: 448,
+    py: 70,
+    img: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&q=80',
+  },
+  {
+    id: 2,
+    flag: '🇦🇺',
+    country: 'Australia',
+    name: 'Whitsundays',
+    hotel: 'qualia, Hamilton Island ⭐',
+    days: '4–7',
+    nights: 3,
+    nightly: '$1,500–2,000+',
+    desc: "Australia's finest resort — private pavilions perched over the Coral Sea. World-class dining, Whitehaven Beach day trip (the world's purest silica sand), and a full-day outer Great Barrier Reef excursion. This is your splurge.",
+    acts: ['Whitehaven Beach', 'Great Barrier Reef', 'Degustation Dinner', 'Scenic Heart Reef Flight'],
+    px: 482,
+    py: 112,
+    img: 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800&q=80',
+  },
+  {
+    id: 3,
+    flag: '🇳🇿',
+    country: 'New Zealand',
+    name: 'Marlborough',
+    hotel: 'Boutique Vineyard Hotel',
+    days: '8–11',
+    nights: 4,
+    nightly: '$300–450',
+    desc: 'Four nights in the heart of Sauvignon Blanc country. Cycle the wine trail to Cloudy Bay and Brancott Estate, then explore the Marlborough Sounds by sea kayak — drowned sea valleys, native forest, seals and dolphins.',
+    acts: ['Wine Cycling Trail', 'Cloudy Bay', 'Marlborough Sounds Kayak', 'Queen Charlotte Track'],
+    px: 624,
+    py: 262,
+    img: 'https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?w=800&q=80',
+  },
+  {
+    id: 4,
+    flag: '🇳🇿',
+    country: 'New Zealand',
+    name: 'Queenstown',
+    hotel: 'Queenstown Park Boutique Hotel',
+    days: '11–14',
+    nights: 3,
+    nightly: '$250–400',
+    desc: 'Adventure capital of the world — 4.8 stars, walk to the gondola, evening happy hour wine. Full-day Milford Sound excursion past Mitre Peak, roaring waterfalls, fur seals and dolphins. Kawarau Bridge bungee, Shotover jet boat, gondola luge.',
+    acts: ['Milford Sound Cruise', 'Kawarau Bungee', 'Shotover Jet Boat', 'Queenstown Hill Hike'],
+    px: 604,
+    py: 312,
+    img: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
+  },
+];
+
+export const ITIN = [
+  {
+    day: 1,
+    di: 0,
+    title: 'Arrive Cairns → Drive to Daintree',
+    desc: 'After ~28 hours of travel (DCA/IAD → LA or Dallas → CNS via Qantas), collect your rental car at Cairns Airport and drive ~2.5 hours north along the Captain Cook Highway. Check in, unwind, dinner on the outdoor deck as the forest comes alive around you.',
+  },
+  {
+    day: 2,
+    di: 0,
+    title: 'Full Daintree Immersion',
+    desc: "A full day deep in the world's oldest living rainforest. Morning guided cassowary walk with a naturalist guide. Afternoon croc river cruise on the Daintree River — spotting saltwater crocodiles and exotic birds from the water. Evening: guided night walk to find glowing fungi, tree frogs, and nocturnal creatures.",
+  },
+  {
+    day: 3,
+    di: 0,
+    title: 'Cape Tribulation Day Trip',
+    desc: 'Drive 45 minutes north to Cape Tribulation — the only place on Earth where two UNESCO World Heritage sites meet at the same beach. Ancient rainforest tumbles directly into the Coral Sea. Spend the day on beach walks, rainforest boardwalks, kayaking through the mangroves, and swimming.',
+  },
+  {
+    day: 4,
+    di: 1,
+    title: 'Morning Free → Fly to Whitsundays',
+    desc: 'Final morning in the Daintree at your own pace. Drive south to Cairns, return the rental car, and board your short flight to Hamilton Island (CNS → HTI, ~1h 15m, Qantas or East Air). Airport transfer direct to qualia. Champagne welcome, check into your private Coral Sea pavilion.',
+  },
+  {
+    day: 5,
+    di: 1,
+    title: 'Arrive & Settle at qualia',
+    desc: "Your first full day at Australia's finest resort. No agenda — this is exactly the point. Explore the resort, use the spa, swim in the infinity pool, and watch the Coral Sea turn gold at sunset. Degustation dinner at The Long Pavilion to close the night.",
+  },
+  {
+    day: 6,
+    di: 1,
+    title: 'Whitehaven Beach',
+    desc: 'Full-day boat excursion to Whitehaven Beach — 7km of 98% pure silica sand, the world\'s whitest. Snorkel at Hill Inlet and Blue Pearl Bay. Watch the swirling sand and tidal patterns from the lookout. Return for sunset cocktails on your private deck.',
+  },
+  {
+    day: 7,
+    di: 1,
+    title: 'Great Barrier Reef — Full Day',
+    desc: "The crown jewel of the trip. Full-day outer reef excursion to Fairey Reef or Bait Reef — one of the Seven Natural Wonders of the World. Snorkel or scuba among turtles, reef sharks, manta rays, and breathtaking coral formations. qualia's concierge arranges everything.",
+  },
+  {
+    day: 8,
+    di: 2,
+    title: 'Fly to Marlborough Wine Country',
+    desc: 'HTI → Auckland via Brisbane (~8 hrs, Qantas or Air NZ), then AKL → BHE nonstop (~1h 30m, Air NZ daily). Arrive in the heart of Sauvignon Blanc country. Transfer to the vineyard hotel. Canapes and wine by the fireplace on arrival — the harvest season here is spectacular in March/April.',
+  },
+  {
+    day: 9,
+    di: 2,
+    title: 'Cycle the Wine Trail',
+    desc: 'Rent e-bikes from the hotel and spend the day on the Marlborough wine trail. Stop at Cloudy Bay, Brancott Estate, and Nautilus for tastings. Gourmet vineyard picnic lunch among the vines. Return for a fireside evening with the hotel\'s curated wine selection.',
+  },
+  {
+    day: 10,
+    di: 2,
+    title: 'Marlborough Sounds',
+    desc: 'Sea kayak or take a cruise through the drowned sea valleys of the Marlborough Sounds — ancient submerged landscape of forested ridgelines, clear bays, and wildlife. Spot fur seals, dolphins, and native birds. Optional: Queen Charlotte Track hike along the ridgeline above the Sounds.',
+  },
+  {
+    day: 11,
+    di: 3,
+    title: 'Fly to Queenstown',
+    desc: 'Morning free in Marlborough. BHE → ZQN via Auckland (~2.5 hrs with connection, Air NZ). Arrive in the adventure capital early afternoon. Check in to Queenstown Park — a short walk from the gondola. Ride up for panoramic dinner views over Lake Wakatipu and the Remarkables.',
+  },
+  {
+    day: 12,
+    di: 3,
+    title: 'Queenstown Adventure Day',
+    desc: 'Pick your adventure. The world-original Kawarau Bridge bungee jump (1988, $170/person). White-water jet boat on the Shotover River through metre-wide canyons. Or the gondola luge for something more leisurely. Evening happy hour — wine and canapes with other guests.',
+  },
+  {
+    day: 13,
+    di: 3,
+    title: 'Milford Sound — Full Day',
+    desc: 'Depart 6am. Drive through Fiordland National Park and the Homer Tunnel. Cruise past Mitre Peak — one of the most photographed mountains on Earth — alongside roaring waterfalls that double in size after rain, colonies of fur seals basking on the rocks, and bottlenose dolphins. Back by 8pm.',
+  },
+  {
+    day: 14,
+    di: 3,
+    title: 'Final Morning → Fly Home',
+    desc: 'Morning hike up Queenstown Hill for farewell panoramic views over Lake Wakatipu and the Remarkables. Last coffee on Church Street. Board ZQN → DCA via Los Angeles (Qantas + American, ~24 hrs). ✈️',
+  },
+];
+
+export const FLIGHTS = [
+  { seg: 'DCA/IAD → CNS', info: 'Qantas via Los Angeles or Dallas · ~28 hrs total', cost: '~$1,300–1,600 pp' },
+  { seg: 'CNS → HTI', info: 'Qantas or East Air · direct · ~1h 15m', cost: '~$200–400 pp' },
+  { seg: 'HTI → AKL', info: 'Qantas or Air NZ · via Brisbane · ~8 hrs', cost: '~$370–500 pp' },
+  { seg: 'AKL → BHE', info: 'Air New Zealand · nonstop · ~1h 30m', cost: '~$80–150 pp' },
+  { seg: 'BHE → ZQN', info: 'Air NZ via Auckland · ~2.5 hrs', cost: '~$120–210 pp' },
+  { seg: 'ZQN → DCA', info: 'Qantas + American via Los Angeles · ~24 hrs', cost: 'incl. in roundtrip' },
+];
+
+export const SWAPS = [
+  {
+    region: '🇦🇺 Daintree & Cairns',
+    items: [
+      { name: 'Hot Air Balloon, Atherton Tablelands', desc: 'Dawn flight over the tablelands with champagne landing. ~$250–350/person.', replaces: 'Swap: croc cruise (Day 2)' },
+      { name: 'Aboriginal Cultural Experience (Tjapukai)', desc: "First Nations culture, storytelling, dance, and bushfood. Half day from Cairns.", replaces: 'Swap: night walk (Day 2)' },
+      { name: 'Sea Kayak Overnight, Cape Trib', desc: 'Through mangroves to remote beaches. Guided, gear included. ~$300/person.', replaces: 'Swap: Cape Trib day trip (Day 3)' },
+      { name: 'Waterfall Circuit, Atherton Tablelands', desc: 'Millaa Millaa, Zillie, Elinjaa Falls. Swimming holes, tree kangaroos. Self-drive.', replaces: 'Swap: cassowary walk (Day 2)' },
+    ],
+  },
+  {
+    region: '🇦🇺 Whitsundays & Reef',
+    items: [
+      { name: 'Seaplane over Heart Reef', desc: 'Fly over Heart Reef, water landing at a secluded lagoon. ~$500–700/person.', replaces: 'Swap: reef cruise (Day 7)' },
+      { name: 'Bareboat Catamaran Charter', desc: 'Sail your own cat among 74 islands for a day. No licence needed for day hire.', replaces: 'Swap: Whitehaven trip (Day 6)' },
+      { name: 'Intro PADI Dive, Outer Reef', desc: '1-day beginner dive arranged by qualia concierge. ~$250/person.', replaces: 'Add-on: Day 7 reef day' },
+      { name: 'Passage Peak Hike, Hamilton Island', desc: "Island's highest point. 2hr return, panoramic reef views. Free.", replaces: 'Add-on: any morning' },
+    ],
+  },
+  {
+    region: '🇳🇿 Marlborough',
+    items: [
+      { name: 'Marlborough Sounds Wilderness Cruise', desc: 'Full-day boat through sea-drowned valleys, native forest, seals, dolphins. ~$150–200/person.', replaces: 'Swap: Queen Charlotte walk (Day 10)' },
+      { name: 'Picton → Wellington by Interislander Ferry', desc: '3.5 hr crossing through the Sounds. Add a Wellington night before flying to Queenstown.', replaces: 'Alternative routing' },
+      { name: 'Omaka Aviation Heritage Centre', desc: "Peter Jackson's private WW1 & WW2 aircraft collection. Half day in Blenheim.", replaces: 'Add-on: afternoon (Day 9 or 10)' },
+      { name: 'Bay of Islands instead of Marlborough', desc: 'Fly Auckland → Kerikeri. Sailing, dolphins, Waitangi Treaty Grounds. More nature, less wine.', replaces: 'Replaces: Marlborough entirely' },
+    ],
+  },
+  {
+    region: '🇳🇿 Queenstown',
+    items: [
+      { name: 'Wanaka Day Trip', desc: "Lake Wanaka, the lone tree, Roy's Peak hike. 45 min from Queenstown. Perfect Milford weather backup.", replaces: 'Swap: Milford Sound (Day 13)' },
+      { name: 'Skydive over Lake Wakatipu', desc: '15,000 ft tandem over the Remarkables. ~$300–400/person.', replaces: 'Swap: bungee (Day 12)' },
+      { name: 'Glenorchy & Paradise Valley', desc: 'Lord of the Rings locations. Horseback, jet boat, glacial valley. 45 min from QT.', replaces: 'Swap: jet boat (Day 12)' },
+      { name: 'Ziptrek Ecotours', desc: '6 ziplines through ancient beech forest above Queenstown. Gondola included. ~$200/person.', replaces: 'Swap: bungee or jet boat' },
+    ],
+  },
+];
+
+export const GALLERY_PHOTOS = [
+  { label: 'Daintree Rainforest', url: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=700&q=80' },
+  { label: 'Cassowary, Far North Queensland', url: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=700&q=80' },
+  { label: 'Cape Tribulation — rainforest meets reef', url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80' },
+  { label: 'Whitehaven Beach, Whitsundays', url: 'https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?w=700&q=80' },
+  { label: 'Great Barrier Reef coral garden', url: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=700&q=80' },
+  { label: 'qualia — Coral Sea at sunrise', url: 'https://images.unsplash.com/photo-1540202403-b7abd6747a18?w=700&q=80' },
+  { label: 'Marlborough vineyard, New Zealand', url: 'https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?w=700&q=80' },
+  { label: 'Cycling the wine trail, Cloudy Bay', url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80' },
+  { label: 'Marlborough Sounds sea kayak', url: 'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=700&q=80' },
+  { label: 'Queenstown — Lake Wakatipu', url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=80' },
+  { label: 'Milford Sound — Mitre Peak', url: 'https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=700&q=80' },
+  { label: 'Kawarau Bridge bungee, Queenstown', url: 'https://images.unsplash.com/photo-1520962880247-cfaf541c8724?w=700&q=80' },
+];
+
+export const PACKING = {
+  'Documents & Admin': [
+    'Passports (valid 6+ months)',
+    'Travel insurance docs',
+    'Hotel confirmations',
+    'Flight confirmations',
+    "International driver's permit",
+    'Emergency contacts',
+  ],
+  Clothing: [
+    'Reef-safe swimsuits (2–3)',
+    'Light hiking gear',
+    'Smart casual (qualia dinners)',
+    'Rain jacket (essential — Daintree!)',
+    'Warm layers for Queenstown',
+    'Comfortable walking shoes',
+  ],
+  'Gear & Tech': [
+    'Underwater camera / GoPro',
+    'Snorkel gear (or rent on-site)',
+    'Reef-safe sunscreen SPF50+',
+    'Insect repellent (Daintree + Sounds)',
+    'Day backpack',
+    'AU + NZ power adapters',
+  ],
+  Health: [
+    'Anti-nausea meds (boat trips)',
+    'First aid basics',
+    'Prescription medications',
+    'SPF lip balm',
+    'Hand sanitizer',
+  ],
+};
+
+export const BUCKET = [
+  'See a cassowary in the wild',
+  'Snorkel the outer Great Barrier Reef',
+  'Fly over Heart Reef',
+  'Watch sunrise from qualia pavilion',
+  'Swim at Whitehaven Beach',
+  'See glowing fungi at night',
+  'Taste wine at Cloudy Bay',
+  'Bungee jump at Kawarau Bridge',
+  'Cruise Milford Sound',
+  'Spot fur seals & dolphins',
+  'Hike Queenstown Hill at sunrise',
+  'Stargaze the Southern Hemisphere sky',
+  'Sea kayak the Marlborough Sounds',
+  'Try a proper New Zealand pavlova',
+];
+
+export const BUDGET = [
+  { cat: 'International Flights (2 pax)', low: 2600, high: 3200, note: 'DCA/IAD ↔ ZQN open jaw' },
+  { cat: 'Domestic Flights — 5 hops', low: 1600, high: 2400, note: 'Within AU + NZ' },
+  { cat: 'Daintree — 4 nights', low: 1200, high: 1600, note: 'Wilderness Lodge' },
+  { cat: 'qualia — 3 nights ✨', low: 4500, high: 6000, note: 'Luxury splurge' },
+  { cat: 'Marlborough — 4 nights', low: 1200, high: 1800, note: 'Boutique Vineyard Hotel' },
+  { cat: 'Queenstown — 3 nights', low: 750, high: 1200, note: 'Queenstown Park' },
+  { cat: 'Activities & Experiences', low: 2000, high: 3500, note: 'Reef, Milford, bungee, etc.' },
+  { cat: 'Food & Dining', low: 1500, high: 2500, note: 'Casual + fine dining mix' },
+  { cat: 'Transport & Misc', low: 500, high: 800, note: 'Rental car, transfers, tips' },
+];
+
+export const TWEAK_DEFAULTS = {
+  tripDate: '2027-03-10',
+  names: 'Matt & Emma',
+  showBudget: true,
+};
