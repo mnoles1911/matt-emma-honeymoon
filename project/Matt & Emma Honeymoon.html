@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Matt &amp; Emma — Australia &amp; New Zealand 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+:root{
+  --bg:#091522;--bg2:#0c1d2e;--card:#132033;--card2:#182840;
+  --border:#1d3450;--accent:#5aafd0;--gold:#c9944a;--gold2:#e8c07a;
+  --text:#ddeeff;--muted:#5e7a96;
+  --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+  --r:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:linear-gradient(to bottom,rgba(9,21,34,.95),transparent)}
+.nav-brand{font-family:var(--serif);font-size:16px;color:var(--gold2);font-style:italic;letter-spacing:.04em}
+.nav-links{display:flex;gap:22px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:11px;letter-spacing:.13em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;text-align:center;padding:100px 32px 80px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 50% 30%,#183d62 0%,#091522 65%)}
+.hero-pre{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;position:relative;z-index:2}
+.hero-name{font-family:var(--serif);font-size:clamp(60px,9vw,108px);line-height:1;position:relative;z-index:2;margin-bottom:10px}
+.hero-name em{color:var(--gold2);font-style:italic}
+.hero-route{font-family:var(--serif);font-size:clamp(15px,2vw,22px);color:var(--muted);margin-bottom:60px;font-style:italic;letter-spacing:.06em;position:relative;z-index:2}
+.countdown{display:flex;align-items:flex-start;gap:6px;justify-content:center;position:relative;z-index:2}
+.cd-unit{text-align:center;min-width:78px}
+.cd-num{font-family:var(--serif);font-size:clamp(42px,6vw,68px);color:var(--text);line-height:1}
+.cd-lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.cd-sep{font-family:var(--serif);font-size:44px;color:var(--border);margin-top:10px;line-height:1}
+.hero-cta{margin-top:52px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+.btn-p{background:var(--accent);color:#091522;border:none;padding:13px 32px;border-radius:3px;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-weight:600;transition:opacity .2s}
+.btn-p:hover{opacity:.82}
+.btn-g{background:transparent;color:var(--text);border:1px solid var(--border);padding:13px 32px;border-radius:3px;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s}
+.btn-g:hover{border-color:var(--accent);color:var(--accent)}
+
+.sw{padding:96px 0}.alt{background:var(--bg2)}
+.si{max-width:1060px;margin:0 auto;padding:0 48px}
+.sec-pre{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.sec-h{font-family:var(--serif);font-size:clamp(30px,4vw,48px);color:var(--text);margin-bottom:14px}
+.sec-h em{color:var(--gold2);font-style:italic}
+.sec-sub{color:var(--muted);font-size:15px;line-height:1.75;max-width:520px;margin-bottom:44px}
+
+/* MAP */
+.map-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;position:relative}
+.map-svg{width:100%;display:block}
+.pgrp{cursor:pointer}
+.mpopup{position:absolute;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:13px 17px;min-width:185px;z-index:50;box-shadow:0 12px 40px rgba(0,0,0,.7);pointer-events:none}
+.mpopup-pre{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.mpopup-name{font-family:var(--serif);font-size:16px;color:var(--gold2);margin-bottom:2px}
+.mpopup-sub{font-size:11px;color:var(--muted);margin-bottom:5px}
+.mpopup-price{font-size:12px;color:var(--text)}
+
+/* DAY CARDS */
+.dc{border:1px solid var(--border);border-radius:var(--r);margin-bottom:9px;overflow:hidden;transition:border-color .2s}
+.dc.open{border-color:var(--accent)}
+.dc-hd{display:flex;align-items:center;gap:20px;padding:17px 22px;cursor:pointer;background:var(--card);transition:background .15s}
+.dc-hd:hover{background:var(--card2)}
+.dc-n{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--muted);min-width:52px;transition:color .2s}
+.dc.open .dc-n{color:var(--accent)}
+.dc-info{flex:1}
+.dc-title{font-size:15px;font-weight:500;color:var(--text)}
+.dc-where{font-size:12px;color:var(--muted);margin-top:2px}
+.dc-arr{color:var(--muted);font-size:16px;transition:transform .3s;flex-shrink:0}
+.dc.open .dc-arr{transform:rotate(180deg)}
+.dc-body{padding:20px 22px 24px;background:var(--bg);border-top:1px solid var(--border)}
+.dc-hotel{font-size:12px;color:var(--accent);margin-bottom:10px}
+.dc-text{font-size:14px;color:var(--muted);line-height:1.85}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.tag{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 11px;font-size:11px;color:var(--muted)}
+.tag.au{border-color:#2a5c3a;color:#5aafd0}
+.tag.nz{border-color:#5c4a20;color:var(--gold2)}
+
+/* SPOTLIGHTS */
+.spots{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.scard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:transform .2s,box-shadow .2s}
+.scard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.scard-img{height:180px;position:relative;overflow:hidden}
+.scard-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.scard:hover .scard-img img{transform:scale(1.05)}
+.scard-body{padding:18px 20px}
+.scard-pre{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.scard-name{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:3px}
+.scard-hotel{font-size:12px;color:var(--muted);margin-bottom:9px}
+.scard-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:9px}
+.scard-price{font-size:13px;color:var(--gold2)}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gcell{border-radius:8px;overflow:hidden;aspect-ratio:4/3;position:relative;background:var(--card2);cursor:pointer}
+.gcell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s,opacity .3s}
+.gcell:hover img{transform:scale(1.06)}
+.gcell-label{position:absolute;bottom:0;left:0;right:0;padding:28px 10px 9px;background:linear-gradient(to top,rgba(9,21,34,.85),transparent);font-size:11px;color:rgba(220,240,255,.8);font-family:monospace;letter-spacing:.04em;opacity:0;transition:opacity .3s}
+.gcell:hover .gcell-label{opacity:1}
+.gcell-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;font-family:monospace}
+
+/* FLIGHTS */
+.flights-block{background:var(--card2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.flights-hd{padding:22px 26px;border-bottom:1px solid var(--border)}
+.flights-hd-title{font-family:var(--serif);font-size:22px;color:var(--text);margin-bottom:3px}
+.flights-hd-sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.flight-row{display:grid;grid-template-columns:140px 1fr auto;gap:16px;align-items:baseline;padding:13px 26px;border-bottom:1px solid var(--border)}
+.flight-row:last-of-type{border-bottom:none}
+.flight-seg{font-family:'DM Sans',monospace;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em}
+.flight-info{font-size:13px;color:var(--muted)}
+.flight-cost{font-size:12px;color:var(--gold2);text-align:right;white-space:nowrap}
+.flight-tip{padding:14px 26px;background:var(--bg);border-top:1px solid var(--border);font-size:12px;color:var(--muted);line-height:1.7}
+
+/* SWAP MENU */
+.swap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-bottom:36px}
+.swap-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px;transition:border-color .2s}
+.swap-card:hover{border-color:var(--accent)}
+.swap-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px}
+.swap-desc{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:7px}
+.swap-replaces{font-size:11px;color:var(--accent);letter-spacing:.03em}
+.swap-region-lbl{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:12px;margin-top:32px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+/* CHECKS */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:5px 20px}
+.crow{display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 0;border-bottom:1px solid rgba(29,52,80,.55)}
+.crow input{accent-color:var(--accent);width:15px;height:15px;cursor:pointer;flex-shrink:0}
+.crow span{font-size:14px;color:var(--muted);transition:color .15s}
+.crow.done span{color:var(--border);text-decoration:line-through}
+
+/* BUDGET */
+.btable{width:100%;border-collapse:collapse}
+.btable th{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.btable td{padding:11px 14px;border-bottom:1px solid rgba(29,52,80,.35);font-size:13px}
+.bbar-bg{background:var(--border);border-radius:3px;height:5px}
+.bbar{border-radius:3px;height:5px}
+
+.fi{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease}
+.fi.vis{opacity:1;transform:none}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
+.footer{padding:64px 48px;text-align:center;border-top:1px solid var(--border)}
+.fq{font-family:var(--serif);font-size:clamp(17px,2.5vw,26px);color:var(--gold2);font-style:italic;margin-bottom:10px}
+.fm{font-size:13px;color:var(--muted);letter-spacing:.06em}
+
+/* Placeholder fallback */
+.ph-img{width:100%;height:100%;background:var(--card2);display:flex;align-items:flex-end;position:relative;overflow:hidden}
+.ph-img::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 14px,rgba(255,255,255,.016) 14px,rgba(255,255,255,.016) 28px)}
+
+@media(max-width:640px){
+  .nav-links{display:none}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .si{padding:0 24px}
+  .flight-row{grid-template-columns:1fr 1fr}
+  .flight-cost{grid-column:1/-1;text-align:left}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useRef}=React;
+
+/* ── DATA ─────────────────────────────────────────────────────────── */
+const DESTS=[
+  {id:1,flag:'🇦🇺',country:'Australia',name:'Daintree Rainforest',hotel:'Daintree Wilderness Lodge',days:'1–4',nights:4,nightly:'$300–400',
+   desc:"The world's oldest living rainforest — 135 million years old. Private rainforest cabins, guided cassowary walks, croc river cruises on the Daintree River, and legendary glowing fungi night walks. Cape Tribulation day trip included.",
+   acts:['Cassowary Walk','Croc River Cruise','Night Walk','Cape Trib Day Trip'],
+   px:448,py:70,
+   img:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&q=80'},
+  {id:2,flag:'🇦🇺',country:'Australia',name:'Whitsundays',hotel:'qualia, Hamilton Island ⭐',days:'4–7',nights:3,nightly:'$1,500–2,000+',
+   desc:"Australia's finest resort — private pavilions perched over the Coral Sea. World-class dining, Whitehaven Beach day trip (the world's purest silica sand), and a full-day outer Great Barrier Reef excursion. This is your splurge.",
+   acts:['Whitehaven Beach','Great Barrier Reef','Degustation Dinner','Scenic Heart Reef Flight'],
+   px:482,py:112,
+   img:'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800&q=80'},
+  {id:3,flag:'🇳🇿',country:'New Zealand',name:'Marlborough',hotel:'Boutique Vineyard Hotel',days:'8–11',nights:4,nightly:'$300–450',
+   desc:"Four nights in the heart of Sauvignon Blanc country. Cycle the wine trail to Cloudy Bay and Brancott Estate, then explore the Marlborough Sounds by sea kayak — drowned sea valleys, native forest, seals and dolphins.",
+   acts:['Wine Cycling Trail','Cloudy Bay','Marlborough Sounds Kayak','Queen Charlotte Track'],
+   px:624,py:262,
+   img:'https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?w=800&q=80'},
+  {id:4,flag:'🇳🇿',country:'New Zealand',name:'Queenstown',hotel:'Queenstown Park Boutique Hotel',days:'11–14',nights:3,nightly:'$250–400',
+   desc:"Adventure capital of the world — 4.8 stars, walk to the gondola, evening happy hour wine. Full-day Milford Sound excursion past Mitre Peak, roaring waterfalls, fur seals and dolphins. Kawarau Bridge bungee, Shotover jet boat, gondola luge.",
+   acts:['Milford Sound Cruise','Kawarau Bungee','Shotover Jet Boat','Queenstown Hill Hike'],
+   px:604,py:312,
+   img:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80'},
+];
+
+const ITIN=[
+  {day:1,di:0,title:'Arrive Cairns → Drive to Daintree',
+   desc:"After ~28 hours of travel (DCA/IAD → LA or Dallas → CNS via Qantas), collect your rental car at Cairns Airport and drive ~2.5 hours north along the Captain Cook Highway. Check in, unwind, dinner on the outdoor deck as the forest comes alive around you."},
+  {day:2,di:0,title:'Full Daintree Immersion',
+   desc:"A full day deep in the world's oldest living rainforest. Morning guided cassowary walk with a naturalist guide. Afternoon croc river cruise on the Daintree River — spotting saltwater crocodiles and exotic birds from the water. Evening: guided night walk to find glowing fungi, tree frogs, and nocturnal creatures."},
+  {day:3,di:0,title:'Cape Tribulation Day Trip',
+   desc:"Drive 45 minutes north to Cape Tribulation — the only place on Earth where two UNESCO World Heritage sites meet at the same beach. Ancient rainforest tumbles directly into the Coral Sea. Spend the day on beach walks, rainforest boardwalks, kayaking through the mangroves, and swimming."},
+  {day:4,di:1,title:'Morning Free → Fly to Whitsundays',
+   desc:"Final morning in the Daintree at your own pace. Drive south to Cairns, return the rental car, and board your short flight to Hamilton Island (CNS → HTI, ~1h 15m, Qantas or East Air). Airport transfer direct to qualia. Champagne welcome, check into your private Coral Sea pavilion."},
+  {day:5,di:1,title:'Arrive &amp; Settle at qualia',
+   desc:"Your first full day at Australia's finest resort. No agenda — this is exactly the point. Explore the resort, use the spa, swim in the infinity pool, and watch the Coral Sea turn gold at sunset. Degustation dinner at The Long Pavilion to close the night."},
+  {day:6,di:1,title:'Whitehaven Beach',
+   desc:"Full-day boat excursion to Whitehaven Beach — 7km of 98% pure silica sand, the world's whitest. Snorkel at Hill Inlet and Blue Pearl Bay. Watch the swirling sand and tidal patterns from the lookout. Return for sunset cocktails on your private deck."},
+  {day:7,di:1,title:'Great Barrier Reef — Full Day',
+   desc:"The crown jewel of the trip. Full-day outer reef excursion to Fairey Reef or Bait Reef — one of the Seven Natural Wonders of the World. Snorkel or scuba among turtles, reef sharks, manta rays, and breathtaking coral formations. qualia's concierge arranges everything."},
+  {day:8,di:2,title:'Fly to Marlborough Wine Country',
+   desc:"HTI → Auckland via Brisbane (~8 hrs, Qantas or Air NZ), then AKL → BHE nonstop (~1h 30m, Air NZ daily). Arrive in the heart of Sauvignon Blanc country. Transfer to the vineyard hotel. Canapes and wine by the fireplace on arrival — the harvest season here is spectacular in March/April."},
+  {day:9,di:2,title:'Cycle the Wine Trail',
+   desc:"Rent e-bikes from the hotel and spend the day on the Marlborough wine trail. Stop at Cloudy Bay, Brancott Estate, and Nautilus for tastings. Gourmet vineyard picnic lunch among the vines. Return for a fireside evening with the hotel's curated wine selection."},
+  {day:10,di:2,title:'Marlborough Sounds',
+   desc:"Sea kayak or take a cruise through the drowned sea valleys of the Marlborough Sounds — ancient submerged landscape of forested ridgelines, clear bays, and wildlife. Spot fur seals, dolphins, and native birds. Optional: Queen Charlotte Track hike along the ridgeline above the Sounds."},
+  {day:11,di:3,title:'Fly to Queenstown',
+   desc:"Morning free in Marlborough. BHE → ZQN via Auckland (~2.5 hrs with connection, Air NZ). Arrive in the adventure capital early afternoon. Check in to Queenstown Park — a short walk from the gondola. Ride up for panoramic dinner views over Lake Wakatipu and the Remarkables."},
+  {day:12,di:3,title:'Queenstown Adventure Day',
+   desc:"Pick your adventure. The world-original Kawarau Bridge bungee jump (1988, $170/person). White-water jet boat on the Shotover River through metre-wide canyons. Or the gondola luge for something more leisurely. Evening happy hour — wine and canapes with other guests."},
+  {day:13,di:3,title:'Milford Sound — Full Day',
+   desc:"Depart 6am. Drive through Fiordland National Park and the Homer Tunnel. Cruise past Mitre Peak — one of the most photographed mountains on Earth — alongside roaring waterfalls that double in size after rain, colonies of fur seals basking on the rocks, and bottlenose dolphins. Back by 8pm."},
+  {day:14,di:3,title:'Final Morning → Fly Home',
+   desc:"Morning hike up Queenstown Hill for farewell panoramic views over Lake Wakatipu and the Remarkables. Last coffee on Church Street. Board ZQN → DCA via Los Angeles (Qantas + American, ~24 hrs). ✈️"},
+];
+
+const FLIGHTS=[
+  {seg:'DCA/IAD → CNS',info:'Qantas via Los Angeles or Dallas · ~28 hrs total',cost:'~$1,300–1,600 pp'},
+  {seg:'CNS → HTI',info:'Qantas or East Air · direct · ~1h 15m',cost:'~$200–400 pp'},
+  {seg:'HTI → AKL',info:'Qantas or Air NZ · via Brisbane · ~8 hrs',cost:'~$370–500 pp'},
+  {seg:'AKL → BHE',info:'Air New Zealand · nonstop · ~1h 30m',cost:'~$80–150 pp'},
+  {seg:'BHE → ZQN',info:'Air NZ via Auckland · ~2.5 hrs',cost:'~$120–210 pp'},
+  {seg:'ZQN → DCA',info:'Qantas + American via Los Angeles · ~24 hrs',cost:'incl. in roundtrip'},
+];
+
+const SWAPS=[
+  {region:'🇦🇺 Daintree & Cairns',items:[
+    {name:'Hot Air Balloon, Atherton Tablelands',desc:'Dawn flight over the tablelands with champagne landing. ~$250–350/person.',replaces:'Swap: croc cruise (Day 2)'},
+    {name:'Aboriginal Cultural Experience (Tjapukai)',desc:"First Nations culture, storytelling, dance, and bushfood. Half day from Cairns.",replaces:'Swap: night walk (Day 2)'},
+    {name:'Sea Kayak Overnight, Cape Trib',desc:'Through mangroves to remote beaches. Guided, gear included. ~$300/person.',replaces:'Swap: Cape Trib day trip (Day 3)'},
+    {name:'Waterfall Circuit, Atherton Tablelands',desc:'Millaa Millaa, Zillie, Elinjaa Falls. Swimming holes, tree kangaroos. Self-drive.',replaces:'Swap: cassowary walk (Day 2)'},
+  ]},
+  {region:'🇦🇺 Whitsundays & Reef',items:[
+    {name:'Seaplane over Heart Reef',desc:'Fly over Heart Reef, water landing at a secluded lagoon. ~$500–700/person.',replaces:'Swap: reef cruise (Day 7)'},
+    {name:'Bareboat Catamaran Charter',desc:'Sail your own cat among 74 islands for a day. No licence needed for day hire.',replaces:'Swap: Whitehaven trip (Day 6)'},
+    {name:'Intro PADI Dive, Outer Reef',desc:'1-day beginner dive arranged by qualia concierge. ~$250/person.',replaces:'Add-on: Day 7 reef day'},
+    {name:'Passage Peak Hike, Hamilton Island',desc:"Island's highest point. 2hr return, panoramic reef views. Free.",replaces:'Add-on: any morning'},
+  ]},
+  {region:'🇳🇿 Marlborough',items:[
+    {name:'Marlborough Sounds Wilderness Cruise',desc:'Full-day boat through sea-drowned valleys, native forest, seals, dolphins. ~$150–200/person.',replaces:'Swap: Queen Charlotte walk (Day 10)'},
+    {name:'Picton → Wellington by Interislander Ferry',desc:'3.5 hr crossing through the Sounds. Add a Wellington night before flying to Queenstown.',replaces:'Alternative routing'},
+    {name:'Omaka Aviation Heritage Centre',desc:"Peter Jackson's private WW1 & WW2 aircraft collection. Half day in Blenheim.",replaces:'Add-on: afternoon (Day 9 or 10)'},
+    {name:'Bay of Islands instead of Marlborough',desc:'Fly Auckland → Kerikeri. Sailing, dolphins, Waitangi Treaty Grounds. More nature, less wine.',replaces:'Replaces: Marlborough entirely'},
+  ]},
+  {region:'🇳🇿 Queenstown',items:[
+    {name:'Wanaka Day Trip',desc:'Lake Wanaka, the lone tree, Roy\'s Peak hike. 45 min from Queenstown. Perfect Milford weather backup.',replaces:'Swap: Milford Sound (Day 13)'},
+    {name:'Skydive over Lake Wakatipu',desc:'15,000 ft tandem over the Remarkables. ~$300–400/person.',replaces:'Swap: bungee (Day 12)'},
+    {name:'Glenorchy & Paradise Valley',desc:'Lord of the Rings locations. Horseback, jet boat, glacial valley. 45 min from QT.',replaces:'Swap: jet boat (Day 12)'},
+    {name:'Ziptrek Ecotours',desc:'6 ziplines through ancient beech forest above Queenstown. Gondola included. ~$200/person.',replaces:'Swap: bungee or jet boat'},
+  ]},
+];
+
+const GALLERY_PHOTOS=[
+  {label:'Daintree Rainforest',url:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=700&q=80'},
+  {label:'Cassowary, Far North Queensland',url:'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=700&q=80'},
+  {label:'Cape Tribulation — rainforest meets reef',url:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80'},
+  {label:'Whitehaven Beach, Whitsundays',url:'https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?w=700&q=80'},
+  {label:'Great Barrier Reef coral garden',url:'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=700&q=80'},
+  {label:'qualia — Coral Sea at sunrise',url:'https://images.unsplash.com/photo-1540202403-b7abd6747a18?w=700&q=80'},
+  {label:'Marlborough vineyard, New Zealand',url:'https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?w=700&q=80'},
+  {label:'Cycling the wine trail, Cloudy Bay',url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80'},
+  {label:'Marlborough Sounds sea kayak',url:'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=700&q=80'},
+  {label:'Queenstown — Lake Wakatipu',url:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=80'},
+  {label:'Milford Sound — Mitre Peak',url:'https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=700&q=80'},
+  {label:'Kawarau Bridge bungee, Queenstown',url:'https://images.unsplash.com/photo-1520962880247-cfaf541c8724?w=700&q=80'},
+];
+
+const PACKING={
+  'Documents & Admin':['Passports (valid 6+ months)','Travel insurance docs','Hotel confirmations','Flight confirmations','International driver\'s permit','Emergency contacts'],
+  'Clothing':['Reef-safe swimsuits (2–3)','Light hiking gear','Smart casual (qualia dinners)','Rain jacket (essential — Daintree!)','Warm layers for Queenstown','Comfortable walking shoes'],
+  'Gear & Tech':['Underwater camera / GoPro','Snorkel gear (or rent on-site)','Reef-safe sunscreen SPF50+','Insect repellent (Daintree + Sounds)','Day backpack','AU + NZ power adapters'],
+  'Health':['Anti-nausea meds (boat trips)','First aid basics','Prescription medications','SPF lip balm','Hand sanitizer'],
+};
+
+const BUCKET=[
+  'See a cassowary in the wild','Snorkel the outer Great Barrier Reef','Fly over Heart Reef',
+  'Watch sunrise from qualia pavilion','Swim at Whitehaven Beach','See glowing fungi at night',
+  'Taste wine at Cloudy Bay','Bungee jump at Kawarau Bridge','Cruise Milford Sound',
+  'Spot fur seals & dolphins','Hike Queenstown Hill at sunrise','Stargaze the Southern Hemisphere sky',
+  'Sea kayak the Marlborough Sounds','Try a proper New Zealand pavlova',
+];
+
+const BUDGET=[
+  {cat:'International Flights (2 pax)',low:2600,high:3200,note:'DCA/IAD ↔ ZQN open jaw'},
+  {cat:'Domestic Flights — 5 hops',low:1600,high:2400,note:'Within AU + NZ'},
+  {cat:'Daintree — 4 nights',low:1200,high:1600,note:'Wilderness Lodge'},
+  {cat:'qualia — 3 nights ✨',low:4500,high:6000,note:'Luxury splurge'},
+  {cat:'Marlborough — 4 nights',low:1200,high:1800,note:'Boutique Vineyard Hotel'},
+  {cat:'Queenstown — 3 nights',low:750,high:1200,note:'Queenstown Park'},
+  {cat:'Activities & Experiences',low:2000,high:3500,note:'Reef, Milford, bungee, etc.'},
+  {cat:'Food & Dining',low:1500,high:2500,note:'Casual + fine dining mix'},
+  {cat:'Transport & Misc',low:500,high:800,note:'Rental car, transfers, tips'},
+];
+
+/* ── HELPERS ──────────────────────────────────────────────────────── */
+function useFI(){
+  const ref=useRef();
+  useEffect(()=>{
+    const el=ref.current;if(!el)return;
+    const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('vis');obs.disconnect();}},{threshold:.1});
+    obs.observe(el);return()=>obs.disconnect();
+  },[]);
+  return ref;
+}
+
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el) window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-68,behavior:'smooth'});
+}
+
+/* ── STARS ────────────────────────────────────────────────────────── */
+function Stars(){
+  const ref=useRef();
+  useEffect(()=>{
+    const c=ref.current;if(!c)return;
+    const ctx=c.getContext('2d');
+    const resize=()=>{c.width=c.offsetWidth;c.height=c.offsetHeight;};
+    resize();
+    const stars=Array.from({length:210},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.5+.2,a:Math.random()*.75+.15,s:Math.random()*.35+.08,ph:Math.random()*Math.PI*2}));
+    let t=0,frame;
+    const draw=()=>{
+      ctx.clearRect(0,0,c.width,c.height);
+      stars.forEach(s=>{
+        ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(185,220,255,${s.a*(0.45+0.55*Math.sin(t*s.s+s.ph))})`;ctx.fill();
+      });
+      t+=.018;frame=requestAnimationFrame(draw);
+    };
+    draw();window.addEventListener('resize',resize);
+    return()=>{cancelAnimationFrame(frame);window.removeEventListener('resize',resize);};
+  },[]);
+  return <canvas ref={ref} style={{position:'absolute',inset:0,width:'100%',height:'100%'}}/>;
+}
+
+/* ── COUNTDOWN ────────────────────────────────────────────────────── */
+function useCd(date){
+  const[t,setT]=useState({});
+  useEffect(()=>{
+    const tick=()=>{
+      const d=new Date(date)-Date.now();
+      if(d<=0){setT({days:0,hours:0,mins:0,secs:0});return;}
+      setT({days:Math.floor(d/864e5),hours:Math.floor(d%864e5/36e5),mins:Math.floor(d%36e5/6e4),secs:Math.floor(d%6e4/1e3)});
+    };
+    tick();const id=setInterval(tick,1e3);return()=>clearInterval(id);
+  },[date]);
+  return t;
+}
+
+/* ── HERO ─────────────────────────────────────────────────────────── */
+function Hero({tripDate,names}){
+  const t=useCd(tripDate);
+  return(
+    <section className="hero" id="top">
+      <div className="hero-bg"/>
+      <Stars/>
+      <p className="hero-pre">✈ A once-in-a-lifetime honeymoon</p>
+      <h1 className="hero-name"><em>{names}</em></h1>
+      <p className="hero-route">Australia &amp; New Zealand · 14 Days · March 2027</p>
+      <div className="countdown">
+        {[['days','Days'],['hours','Hrs'],['mins','Min'],['secs','Sec']].map(([k,l],i)=>(
+          <React.Fragment key={k}>
+            {i>0&&<span className="cd-sep">·</span>}
+            <div className="cd-unit">
+              <div className="cd-num">{String(t[k]??'—').padStart(2,'0')}</div>
+              <div className="cd-lbl">{l}</div>
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="hero-cta">
+        <button className="btn-p" onClick={()=>goTo('itinerary')}>View Itinerary</button>
+        <button className="btn-g" onClick={()=>goTo('map')}>Explore the Map</button>
+      </div>
+      <div style={{position:'absolute',bottom:34,left:'50%',transform:'translateX(-50%)',display:'flex',flexDirection:'column',alignItems:'center',gap:8,cursor:'pointer',color:'var(--muted)',fontSize:10,letterSpacing:'.16em',textTransform:'uppercase',zIndex:2}} onClick={()=>goTo('map')}>
+        <div style={{width:1,height:34,background:'linear-gradient(to bottom,var(--border),transparent)'}}/>
+        Scroll
+      </div>
+    </section>
+  );
+}
+
+/* ── MAP ──────────────────────────────────────────────────────────── */
+function MapSection(){
+  const[active,setActive]=useState(null);
+  const ref=useFI();
+  const svgW=880,svgH=400;
+
+  const auPath="M 92,220 L 97,162 L 112,110 L 172,78 L 235,50 L 316,36 L 394,36 L 440,50 L 462,72 L 480,112 L 500,158 L 484,207 L 464,240 L 420,256 L 376,260 L 314,252 L 264,250 L 202,244 L 134,236 Z";
+  const nzN="M 615,170 L 638,164 L 655,176 L 652,214 L 638,238 L 618,240 L 606,226 L 608,195 Z";
+  const nzS="M 604,248 L 638,242 L 655,258 L 658,292 L 644,322 L 622,338 L 600,330 L 578,308 L 576,282 L 592,258 Z";
+  const tas="M 440,263 L 453,261 L 456,275 L 443,278 Z";
+
+  const flights=DESTS.slice(0,-1).map((_,i)=>{
+    const a=DESTS[i],b=DESTS[i+1];
+    const mx=(a.px+b.px)/2,my=Math.min(a.py,b.py)-42;
+    return `M ${a.px},${a.py} Q ${mx},${my} ${b.px},${b.py}`;
+  });
+
+  const popup=(d)=>{
+    const xp=d.px/svgW*100,yp=d.py/svgH*100;
+    return{
+      left:xp>65?'auto':`${Math.min(xp+3,56)}%`,
+      right:xp>65?`${Math.max(100-xp+3,5)}%`:'auto',
+      top:yp>65?`${yp-44}%`:`${Math.max(yp-4,2)}%`,
+    };
+  };
+
+  return(
+    <div className="sw alt" id="map">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Route Overview</p>
+        <h2 className="sec-h">The Journey <em>Map</em></h2>
+        <p className="sec-sub">14 days, 2 countries, 4 extraordinary hotels. Click any pin to explore.</p>
+        <div className="map-wrap">
+          <svg viewBox={`0 0 ${svgW} ${svgH}`} className="map-svg" style={{background:'linear-gradient(145deg,#091830 0%,#0b2142 100%)'}}>
+            {[...Array(9)].map((_,i)=><line key={'v'+i} x1={i*110} y1={0} x2={i*110} y2={svgH} stroke="rgba(255,255,255,.022)" strokeWidth={1}/>)}
+            {[...Array(5)].map((_,i)=><line key={'h'+i} x1={0} y1={i*100} x2={svgW} y2={i*100} stroke="rgba(255,255,255,.022)" strokeWidth={1}/>)}
+            <path d={auPath} fill="#172d47" stroke="#1e3f60" strokeWidth={1.5}/>
+            <path d={nzN} fill="#172d47" stroke="#1e3f60" strokeWidth={1.5}/>
+            <path d={nzS} fill="#172d47" stroke="#1e3f60" strokeWidth={1.5}/>
+            <path d={tas} fill="#172d47" stroke="#1e3f60" strokeWidth={1.5}/>
+            <text x="290" y="172" fill="rgba(255,255,255,.09)" fontSize="22" fontFamily="Georgia,serif" fontStyle="italic" textAnchor="middle">Australia</text>
+            <text x="626" y="296" fill="rgba(255,255,255,.09)" fontSize="11" fontFamily="Georgia,serif" fontStyle="italic" textAnchor="middle">New Zealand</text>
+            {flights.map((d,i)=><path key={i} d={d} fill="none" stroke="rgba(90,175,208,.28)" strokeWidth={1.5} strokeDasharray="7,5"/>)}
+            {DESTS.map((d)=>(
+              <g key={d.id} className="pgrp" onClick={()=>setActive(active?.id===d.id?null:d)}>
+                <circle cx={d.px} cy={d.py} r={16} fill={active?.id===d.id?'rgba(201,148,74,.2)':'rgba(90,175,208,.12)'}/>
+                <circle cx={d.px} cy={d.py} r={active?.id===d.id?6:4} fill={active?.id===d.id?'#c9944a':'#5aafd0'} style={{transition:'r .2s'}}/>
+                <line x1={d.px} y1={d.py-5} x2={d.px} y2={d.py-21} stroke={active?.id===d.id?'#c9944a':'#5aafd0'} strokeWidth={1.5}/>
+                <text x={d.px} y={d.py-27} fill={active?.id===d.id?'#e8c07a':'rgba(210,235,255,.8)'} fontSize="8" fontFamily="sans-serif" textAnchor="middle" fontWeight="600">D{d.days}</text>
+              </g>
+            ))}
+          </svg>
+          {active&&(
+            <div className="mpopup" style={popup(active)}>
+              <p className="mpopup-pre">{active.flag} {active.country} · Days {active.days}</p>
+              <p className="mpopup-name">{active.name}</p>
+              <p className="mpopup-sub">{active.hotel}</p>
+              <p className="mpopup-price">{active.nightly}/night · {active.nights} nights</p>
+            </div>
+          )}
+          <div style={{position:'absolute',bottom:14,right:14,display:'flex',flexDirection:'column',gap:7}}>
+            <div style={{display:'flex',alignItems:'center',gap:7,fontSize:10,color:'var(--muted)'}}>
+              <svg width={26} height={8}><line x1={0} y1={4} x2={26} y2={4} stroke="rgba(90,175,208,.5)" strokeWidth={1.5} strokeDasharray="6,4"/></svg>Flight path
+            </div>
+            <div style={{display:'flex',alignItems:'center',gap:7,fontSize:10,color:'var(--muted)'}}>
+              <div style={{width:10,height:10,borderRadius:'50%',background:'var(--accent)'}}/>Destination
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── ITINERARY ────────────────────────────────────────────────────── */
+function ItinSection(){
+  const[open,setOpen]=useState(1);
+  const ref=useFI();
+  return(
+    <div className="sw" id="itinerary">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Day by Day</p>
+        <h2 className="sec-h">The Full <em>Itinerary</em></h2>
+        <p className="sec-sub">14 unforgettable days — tap any to read the full story.</p>
+        {ITIN.map(d=>{
+          const dest=DESTS[d.di];const isOpen=open===d.day;
+          return(
+            <div key={d.day} className={`dc${isOpen?' open':''}`}>
+              <div className="dc-hd" onClick={()=>setOpen(isOpen?null:d.day)}>
+                <span className="dc-n">Day {d.day}</span>
+                <div className="dc-info">
+                  <div className="dc-title" dangerouslySetInnerHTML={{__html:d.title}}/>
+                  <div className="dc-where">{dest.flag} {dest.name} · {dest.hotel}</div>
+                </div>
+                <span className="dc-arr">▾</span>
+              </div>
+              {isOpen&&(
+                <div className="dc-body">
+                  <p className="dc-hotel">🏨 {dest.hotel} · {dest.nightly}/night</p>
+                  <p className="dc-text">{d.desc}</p>
+                  <div className="tags">{dest.acts.map(a=><span key={a} className={`tag ${dest.flag==='🇦🇺'?'au':'nz'}`}>{a}</span>)}</div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ── SPOTLIGHTS ───────────────────────────────────────────────────── */
+function SpotsSection(){
+  const ref=useFI();
+  return(
+    <div className="sw alt" id="destinations">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Where You're Staying</p>
+        <h2 className="sec-h">The Four <em>Hotels</em></h2>
+        <p className="sec-sub">From ancient rainforest to coral sea to vineyard to mountain adventure.</p>
+        <div className="spots">
+          {DESTS.map(d=>(
+            <div key={d.id} className="scard">
+              <div className="scard-img">
+                <img src={d.img} alt={d.name} loading="lazy" onError={e=>{e.target.style.display='none';}}/>
+                <span style={{position:'absolute',top:10,right:10,background:'rgba(9,21,34,.88)',borderRadius:3,padding:'3px 8px',fontSize:10,color:'var(--gold2)',letterSpacing:'.06em'}}>Days {d.days}</span>
+              </div>
+              <div className="scard-body">
+                <p className="scard-pre">{d.flag} {d.country}</p>
+                <p className="scard-name">{d.name}</p>
+                <p className="scard-hotel">{d.hotel}</p>
+                <p className="scard-desc">{d.desc.slice(0,120)}…</p>
+                <p className="scard-price">{d.nightly} <span style={{fontSize:11,color:'var(--muted)'}}>/ night</span></p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── GALLERY ──────────────────────────────────────────────────────── */
+function GallerySection(){
+  const ref=useFI();
+  const[loaded,setLoaded]=useState({});
+  const[errored,setErrored]=useState({});
+
+  return(
+    <div className="sw" id="gallery">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Memories to Make</p>
+        <h2 className="sec-h">Photo <em>Gallery</em></h2>
+        <p className="sec-sub">Moments from every stop on the route — swap in your own photos when you're back.</p>
+        <div className="gallery">
+          {GALLERY_PHOTOS.map((p,i)=>(
+            <div key={i} className="gcell">
+              {!loaded[i]&&!errored[i]&&(
+                <div className="gcell-loading">Loading…</div>
+              )}
+              {!errored[i]&&(
+                <img
+                  src={p.url}
+                  alt={p.label}
+                  loading="lazy"
+                  style={{opacity:loaded[i]?1:0}}
+                  onLoad={()=>setLoaded(l=>({...l,[i]:true}))}
+                  onError={()=>{setErrored(e=>({...e,[i]:true}));}}
+                />
+              )}
+              {errored[i]&&(
+                <div className="ph-img" style={{height:'100%'}}>
+                  <span style={{position:'relative',zIndex:1,padding:'7px 10px',fontSize:10,fontFamily:'monospace',color:'var(--muted)'}}>{p.label}</span>
+                </div>
+              )}
+              <div className="gcell-label">{p.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── FLIGHTS ──────────────────────────────────────────────────────── */
+function FlightsSection(){
+  const ref=useFI();
+  return(
+    <div className="sw alt" id="flights">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Getting There</p>
+        <h2 className="sec-h">Flights at a <em>Glance</em></h2>
+        <p className="sec-sub">All 6 legs — Washington DC origin and return. Book as open-jaw: fly into Cairns, return from Queenstown.</p>
+        <div className="flights-block">
+          <div className="flights-hd">
+            <p className="flights-hd-title">Washington DC → Cairns → Queenstown → Washington DC</p>
+            <p className="flights-hd-sub">Open-jaw · 6 flights total · 14 nights</p>
+          </div>
+          {FLIGHTS.map((f,i)=>(
+            <div key={i} className="flight-row">
+              <span className="flight-seg">{f.seg}</span>
+              <span className="flight-info">{f.info}</span>
+              <span className="flight-cost">{f.cost}</span>
+            </div>
+          ))}
+          <div className="flight-tip">
+            💡 <strong style={{color:'var(--text)'}}>Book open-jaw ASAP.</strong> IAD (Dulles) has more transpacific routing options than DCA. Consider Fiji Airways via Nadi — award-winning cabin and a tropical layover preview. Book international 6–9 months out. March/April is shoulder season — lush Daintree, golden Marlborough harvest, ideal Queenstown autumn.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── SWAP MENU ────────────────────────────────────────────────────── */
+function SwapSection(){
+  const ref=useFI();
+  return(
+    <div className="sw" id="swaps">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Flexibility</p>
+        <h2 className="sec-h">Activity <em>Swap Menu</em></h2>
+        <p className="sec-sub">Alternatives to trade in and out — each replaces or adds to a specific slot in the itinerary.</p>
+        {SWAPS.map(region=>(
+          <div key={region.region}>
+            <p className="swap-region-lbl">{region.region}</p>
+            <div className="swap-grid">
+              {region.items.map(item=>(
+                <div key={item.name} className="swap-card">
+                  <p className="swap-name">{item.name}</p>
+                  <p className="swap-desc">{item.desc}</p>
+                  <p className="swap-replaces">{item.replaces}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── PACKING ──────────────────────────────────────────────────────── */
+function PackingSection(){
+  const[checked,setChecked]=useState({});
+  const ref=useFI();
+  const total=Object.values(PACKING).flat().length;
+  const done=Object.values(checked).filter(Boolean).length;
+  return(
+    <div className="sw alt" id="packing">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Preparation</p>
+        <h2 className="sec-h">Packing <em>List</em></h2>
+        <p className="sec-sub">Everything for 14 days across rainforest, reef, vineyard, and mountain.</p>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(250px,1fr))',gap:'32px 40px'}}>
+          {Object.entries(PACKING).map(([cat,items])=>(
+            <div key={cat}>
+              <h3 style={{fontFamily:'var(--serif)',fontSize:15,color:'var(--gold2)',marginBottom:10,paddingBottom:8,borderBottom:'1px solid var(--border)'}}>{cat}</h3>
+              {items.map(item=>{
+                const k=cat+item;
+                return(
+                  <div key={item} className={`crow${checked[k]?' done':''}`} onClick={()=>setChecked(c=>({...c,[k]:!c[k]}))}>
+                    <input type="checkbox" checked={!!checked[k]} onChange={()=>{}}/>
+                    <span>{item}</span>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+        <p style={{marginTop:24,fontFamily:'var(--serif)',fontStyle:'italic',fontSize:15,color:done===total?'var(--gold2)':'var(--muted)'}}>
+          {done} / {total} items packed{done===total?" — you're ready! ✈️":''}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── BUCKET LIST ──────────────────────────────────────────────────── */
+function BucketSection(){
+  const[checked,setChecked]=useState({});
+  const ref=useFI();
+  const done=Object.values(checked).filter(Boolean).length;
+  return(
+    <div className="sw" id="bucket">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Adventures</p>
+        <h2 className="sec-h">Bucket <em>List</em></h2>
+        <p className="sec-sub">Check these off as you go — then compare notes after!</p>
+        <div className="cgrid">
+          {BUCKET.map(item=>(
+            <div key={item} className={`crow${checked[item]?' done':''}`} onClick={()=>setChecked(c=>({...c,[item]:!c[item]}))}>
+              <input type="checkbox" checked={!!checked[item]} onChange={()=>{}}/>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+        <p style={{marginTop:28,fontFamily:'var(--serif)',fontStyle:'italic',fontSize:18,color:'var(--gold2)'}}>
+          {done} of {BUCKET.length} adventures completed{done>0?' ✨':''}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── BUDGET ───────────────────────────────────────────────────────── */
+function BudgetSection(){
+  const ref=useFI();
+  const tL=BUDGET.reduce((s,b)=>s+b.low,0);
+  const tH=BUDGET.reduce((s,b)=>s+b.high,0);
+  const maxV=Math.max(...BUDGET.map(b=>b.high));
+  const fmt=n=>'$'+n.toLocaleString();
+  return(
+    <div className="sw alt" id="budget">
+      <div className="si fi" ref={ref}>
+        <p className="sec-pre">Trip Finances</p>
+        <h2 className="sec-h">Budget <em>Overview</em></h2>
+        <p className="sec-sub">Estimated costs for two people. Ranges reflect booking timing and choices.</p>
+        <div style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:'var(--r)',overflow:'hidden'}}>
+          <table className="btable">
+            <thead>
+              <tr>
+                <th>Category</th><th>Low</th><th>High</th><th style={{width:'24%'}}>Scale</th><th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {BUDGET.map(b=>(
+                <tr key={b.cat}>
+                  <td style={{color:'var(--text)'}}>{b.cat}</td>
+                  <td style={{color:'var(--accent)',fontFamily:'monospace'}}>{fmt(b.low)}</td>
+                  <td style={{color:'var(--muted)',fontFamily:'monospace'}}>{fmt(b.high)}</td>
+                  <td><div className="bbar-bg"><div className="bbar" style={{width:`${b.high/maxV*100}%`,background:b.cat.includes('qualia')?'var(--gold)':'var(--accent)'}}/></div></td>
+                  <td style={{color:'var(--muted)',fontSize:11}}>{b.note}</td>
+                </tr>
+              ))}
+              <tr style={{borderTop:'2px solid var(--border)'}}>
+                <td style={{color:'var(--gold2)',fontWeight:600,fontSize:14}}>Total (2 people)</td>
+                <td style={{color:'var(--gold)',fontFamily:'monospace',fontWeight:700}}>{fmt(tL)}</td>
+                <td style={{color:'var(--gold2)',fontFamily:'monospace',fontWeight:700}}>{fmt(tH)}</td>
+                <td></td>
+                <td style={{fontSize:11,color:'var(--muted)'}}>Excl. honeymoon extras</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style={{marginTop:14,fontSize:12,color:'var(--muted)'}}>💡 Book international flights and qualia early — both are time-sensitive and represent the largest share of total cost.</p>
+      </div>
+    </div>
+  );
+}
+
+/* ── TWEAKS ───────────────────────────────────────────────────────── */
+const TWEAK_DEFAULTS=/*EDITMODE-BEGIN*/{"tripDate":"2027-03-10","names":"Matt & Emma","showBudget":true}/*EDITMODE-END*/;
+
+function TweaksPanel({tweaks,setTweak,onClose}){
+  return(
+    <div style={{position:'fixed',bottom:20,right:20,width:275,background:'#182840',border:'1px solid #1d3450',borderRadius:12,padding:'16px 18px',boxShadow:'0 10px 48px rgba(0,0,0,.65)',zIndex:9999,fontFamily:'var(--sans)',fontSize:13,color:'#ddeeff'}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
+        <span style={{fontWeight:600,letterSpacing:'.06em'}}>Tweaks</span>
+        <button onClick={onClose} style={{background:'none',border:'none',color:'#5e7a96',cursor:'pointer',fontSize:22,lineHeight:1,padding:0}}>×</button>
+      </div>
+      <label style={{fontSize:10,color:'#5e7a96',letterSpacing:'.13em',textTransform:'uppercase',display:'block',marginBottom:5}}>Departure Date</label>
+      <input type="date" value={tweaks.tripDate} onChange={e=>setTweak('tripDate',e.target.value)} style={{width:'100%',background:'#091522',border:'1px solid #1d3450',borderRadius:6,padding:'7px 10px',color:'#ddeeff',fontFamily:'var(--sans)',fontSize:13,marginBottom:13}}/>
+      <label style={{fontSize:10,color:'#5e7a96',letterSpacing:'.13em',textTransform:'uppercase',display:'block',marginBottom:5}}>Names</label>
+      <input type="text" value={tweaks.names} onChange={e=>setTweak('names',e.target.value)} style={{width:'100%',background:'#091522',border:'1px solid #1d3450',borderRadius:6,padding:'7px 10px',color:'#ddeeff',fontFamily:'var(--sans)',fontSize:13,marginBottom:13}}/>
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+        <label style={{fontSize:10,color:'#5e7a96',letterSpacing:'.13em',textTransform:'uppercase'}}>Show Budget</label>
+        <input type="checkbox" checked={tweaks.showBudget} onChange={e=>setTweak('showBudget',e.target.checked)} style={{accentColor:'var(--accent)',width:16,height:16,cursor:'pointer'}}/>
+      </div>
+    </div>
+  );
+}
+
+/* ── APP ──────────────────────────────────────────────────────────── */
+function App(){
+  const[tweaks,setTweaksState]=useState(TWEAK_DEFAULTS);
+  const[showTweaks,setShowTweaks]=useState(false);
+
+  const setTweak=(k,v)=>setTweaksState(prev=>{
+    const next={...prev,[k]:v};
+    window.parent.postMessage({type:'__edit_mode_set_keys',edits:next},'*');
+    return next;
+  });
+
+  useEffect(()=>{
+    const h=e=>{
+      if(e.data?.type==='__activate_edit_mode') setShowTweaks(true);
+      if(e.data?.type==='__deactivate_edit_mode') setShowTweaks(false);
+    };
+    window.addEventListener('message',h);
+    window.parent.postMessage({type:'__edit_mode_available'},'*');
+    return()=>window.removeEventListener('message',h);
+  },[]);
+
+  const nav=[['map','Map'],['itinerary','Itinerary'],['destinations','Hotels'],['gallery','Gallery'],['flights','Flights'],['swaps','Swap Menu'],['packing','Packing'],['bucket','Bucket List'],...(tweaks.showBudget?[['budget','Budget']]:[])];
+
+  return(
+    <div>
+      <nav className="nav">
+        <div className="nav-brand">{tweaks.names} · 2027</div>
+        <ul className="nav-links">
+          {nav.map(([id,l])=>(
+            <li key={id}><a href={'#'+id} onClick={e=>{e.preventDefault();goTo(id);}}>{l}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <Hero tripDate={tweaks.tripDate} names={tweaks.names}/>
+      <div className="divider"/>
+      <MapSection/>
+      <div className="divider"/>
+      <ItinSection/>
+      <div className="divider"/>
+      <SpotsSection/>
+      <div className="divider"/>
+      <GallerySection/>
+      <div className="divider"/>
+      <FlightsSection/>
+      <div className="divider"/>
+      <SwapSection/>
+      <div className="divider"/>
+      <PackingSection/>
+      <div className="divider"/>
+      <BucketSection/>
+      {tweaks.showBudget&&<><div className="divider"/><BudgetSection/></>}
+      <footer className="footer">
+        <p className="fq">"{tweaks.names} — forever begins in March 2027"</p>
+        <p className="fm">Washington DC · Australia · New Zealand · 14 days · A lifetime of memories</p>
+      </footer>
+      {showTweaks&&(
+        <TweaksPanel tweaks={tweaks} setTweak={setTweak} onClose={()=>{setShowTweaks(false);window.parent.postMessage({type:'__edit_mode_dismissed'},'*');}}/>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
