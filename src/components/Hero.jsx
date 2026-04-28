@@ -16,7 +16,12 @@ export function Hero({ tripDate, names }) {
       <h1 className="hero-name">
         <em>{names}</em>
       </h1>
-      <p className="hero-route">Australia &amp; New Zealand · 14 Days · March 2027</p>
+      <p className="hero-route">
+        <span className="hero-country au-text">Australia</span>
+        <span className="hero-route-sep"> &amp; </span>
+        <span className="hero-country nz-text">New Zealand</span>
+        <span className="hero-route-meta"> · 14 Days · March 2027</span>
+      </p>
       <div className="countdown">
         {[['days', 'Days'], ['hours', 'Hrs'], ['mins', 'Min'], ['secs', 'Sec']].map(([k, l], i) => (
           <span key={k} style={{ display: 'contents' }}>

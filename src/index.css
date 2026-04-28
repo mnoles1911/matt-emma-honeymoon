@@ -117,6 +117,30 @@ body {
   letter-spacing: 0.06em;
   position: relative;
   z-index: 2;
+  line-height: 1.5;
+}
+.hero-country {
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+.au-text {
+  color: var(--accent);
+}
+.nz-text {
+  color: var(--gold2);
+}
+.hero-route-sep {
+  font-size: clamp(15px, 2vw, 22px);
+  color: var(--muted);
+  margin: 0 4px;
+}
+.hero-route-meta {
+  font-size: clamp(12px, 1.6vw, 18px);
+  color: var(--muted);
+  display: block;
+  margin-top: 4px;
 }
 .countdown {
   display: flex;
@@ -239,46 +263,173 @@ body {
   overflow: hidden;
   position: relative;
 }
-.map-svg {
+.leaflet-map-wrap {
+  height: 500px;
+}
+.leaflet-map-container {
   width: 100%;
-  display: block;
+  height: 100%;
 }
-.pgrp {
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: #091830 !important;
+  font-family: var(--sans) !important;
+}
+.leaflet-control-attribution {
+  background: rgba(9,21,34,.75) !important;
+  color: var(--muted) !important;
+  font-size: 9px !important;
+}
+.leaflet-control-attribution a {
+  color: var(--accent) !important;
+}
+.leaflet-control-zoom a {
+  background: var(--card) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: var(--card2) !important;
+  color: var(--accent) !important;
+}
+
+/* Custom map markers */
+.map-dest-icon {
+  background: transparent !important;
+  border: none !important;
+}
+.map-dest-pin {
+  width: 40px;
+  height: 40px;
+  position: relative;
   cursor: pointer;
+  transition: transform 0.18s;
 }
-.mpopup {
+.map-dest-pin:hover {
+  transform: scale(1.2);
+}
+.mdp-ring {
   position: absolute;
-  background: var(--card2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 13px 17px;
-  min-width: 185px;
-  z-index: 50;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid;
+  transition: transform 0.2s;
+}
+.mdp-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+}
+.mdp-label {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-family: var(--sans);
+  font-weight: 700;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0,0,0,.9);
+  letter-spacing: 0.04em;
   pointer-events: none;
 }
-.mpopup-pre {
+
+/* Leaflet popup */
+.map-custom-popup .leaflet-popup-content-wrapper {
+  background: var(--card2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,.7) !important;
+  padding: 0 !important;
+  color: var(--text) !important;
+}
+.map-custom-popup .leaflet-popup-tip-container {
+  display: none;
+}
+.map-custom-popup .leaflet-popup-close-button {
+  color: var(--muted) !important;
+  top: 8px !important;
+  right: 10px !important;
+  font-size: 16px !important;
+}
+.map-popup-inner {
+  padding: 15px 18px;
+  min-width: 200px;
+}
+.mpi-flag {
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
-.mpopup-name {
+.mpi-name {
   font-family: var(--serif);
-  font-size: 16px;
+  font-size: 17px;
   color: var(--gold2);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
-.mpopup-sub {
-  font-size: 11px;
+.mpi-hotel {
+  font-size: 12px;
   color: var(--muted);
   margin-bottom: 5px;
 }
-.mpopup-price {
-  font-size: 12px;
+.mpi-days {
+  font-size: 11px;
   color: var(--text);
+  margin-bottom: 12px;
 }
+.mpi-btn {
+  background: var(--accent);
+  color: #091822;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+.mpi-btn:hover {
+  opacity: 0.82;
+}
+
+/* Map legend */
+.map-legend {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background: rgba(9,21,34,.82);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 13px;
+}
+.map-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--muted);
+}
+.map-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.map-legend-dot.au { background: var(--accent); }
+.map-legend-dot.nz { background: var(--gold2); }
 
 /* DAY CARDS */
 .dc {
@@ -346,6 +497,19 @@ body {
   color: var(--accent);
   margin-bottom: 10px;
 }
+.dc-hotel-link, .dc-hotel-link-full {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+  transition: color 0.15s;
+}
+.dc-hotel-link:hover, .dc-hotel-link-full:hover {
+  color: var(--gold2);
+}
+.dc-hotel-link-full {
+  color: var(--accent);
+  font-weight: 500;
+}
 .dc-text {
   font-size: 14px;
   color: var(--muted);
@@ -364,6 +528,14 @@ body {
   padding: 3px 11px;
   font-size: 11px;
   color: var(--muted);
+  text-decoration: none;
+}
+.tag-link {
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  cursor: pointer;
+}
+.tag-link:hover {
+  background: rgba(255,255,255,.05);
 }
 .tag.au {
   border-color: #2a5c3a;
@@ -426,6 +598,61 @@ body {
   font-size: 12px;
   color: var(--muted);
   margin-bottom: 9px;
+  display: block;
+}
+.scard-hotel-link {
+  text-decoration: none;
+  color: var(--muted);
+  border-bottom: 1px dotted var(--muted);
+  transition: color 0.15s, border-color 0.15s;
+}
+.scard-hotel-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.scard-days-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(9,21,34,.88);
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-size: 10px;
+  color: var(--gold2);
+  letter-spacing: .06em;
+}
+.scard-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(9,21,34,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.scard:hover .scard-img-overlay {
+  opacity: 1;
+}
+.img-upload-btn {
+  background: rgba(9,21,34,.85);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-family: var(--sans);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.img-upload-btn:hover {
+  background: var(--card2);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .scard-desc {
   font-size: 13px;
@@ -488,6 +715,37 @@ body {
   color: var(--muted);
   font-size: 11px;
   font-family: monospace;
+}
+.gcell-upload-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+  background: rgba(9,21,34,.45);
+}
+.gcell:hover .gcell-upload-overlay {
+  opacity: 1;
+}
+.gcell-upload-btn {
+  background: rgba(9,21,34,.85);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.gcell-upload-btn:hover {
+  background: var(--card2);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* FLIGHTS */
